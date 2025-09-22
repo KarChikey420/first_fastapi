@@ -36,4 +36,4 @@ def update_product(id:int ,product:product):
         if product[i].id == id:
             product_list[i]=product
             return "product is successfully updated"
-    return "not found"
+    return "not found" 
