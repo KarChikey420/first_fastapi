@@ -1,13 +1,14 @@
 import psycopg2
 
 conn=psycopg2.connect(
-    host="localhost",
-    user="postgres",
     database="mydb",
-    password="root"
+    password="root",
+    user="postgres",
+    host="localhost"
 )
-print("Database connected successfully")
-cur=conn.cursor()
 
-cur.execute("select * from student")
+print("database connected")
+
+cur=conn.cursor()
+cur.execute("select name from student where class='class 10';")
 print(cur.fetchall())
