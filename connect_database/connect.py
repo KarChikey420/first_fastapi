@@ -9,8 +9,9 @@ conn=psycopg2.connect(
 print("database connected successfully!")
 cursor=conn.cursor()
 
-cursor.execute('''create table school (id int primary key,
-               name varchar(20),class varchar(20),fees int)''')
+cursor.execute("DROP TABLE IF EXISTS school")
+cursor.execute('''create table school(id int primary key,
+               name varchar(20),class_name varchar(20),fees int)''')
 conn.commit()
 
 data=[
