@@ -2,13 +2,27 @@ import psycopg2
 
 conn=psycopg2.connect(
     database="mydb",
-    password="root",
     user="postgres",
+    password="root",
     host="localhost"
 )
+print("database connected successfully!")
+cursor=conn.cursor()
 
-print("database connected")
+cursor.execute('''create table school (id int primary key,
+               name varchar(20),class varchar(20),fees int)''')
+conn.commit()
 
-cur=conn.cursor()
-cur.execute("select name from student where class='class 10';")
-print(cur.fetchall())
+data=[
+    (1,'john','first',5000),
+    (2,'jenny','second',6000),
+    (3,'jake','third',7000),
+    (4,'james','fourth',8000)
+]
+
+cursor.executemany('insert into school values(%s,%s,%s,%s)',data)
+print("data inserted successfully!")
+
+conn.commit()
+cursor.close()
+
