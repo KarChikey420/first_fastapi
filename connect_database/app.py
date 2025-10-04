@@ -47,5 +47,11 @@ def update_student(id:int,class_name:str,name:str,fees:int,db:Session=Depends(ge
     db.refresh(student)
     return student
 
+@app.delete(f"/school/{id}")
+def delete_student(id:int,db:Session=Depends(get_db)):
+    Student_obj=db.query(Student).filter(Student.id==id).first()
+    db.delete(Student_obj)
+    db.commit()
+    return "student is successfully deleted"
 
     
