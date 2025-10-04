@@ -36,3 +36,16 @@ def create_student(id:int,class_name:str,name:str,fees:int,db:Session=Depends(ge
     db.commit()
     db.refresh(new_student)
     return new_student
+
+@app.put("/school/{id}")
+def update_student(id:int,class_name:str,name:str,fees:int,db:Session=Depends(get_db)):
+    student=db.query(Student).filter(Student.id==id).first()
+    student.class_name=class_name
+    student.name=name
+    student.fees=fees
+    db.commit()
+    db.refresh(student)
+    return student
+
+
+    
