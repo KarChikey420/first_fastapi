@@ -42,7 +42,7 @@ def get_db():
 
 @app.get("/school/")
 def get_students(db: Session = Depends(get_db)):
-    return db.query(StudentORM).all()  # ✅ use ORM class
+    return db.query(StudentORM).all() 
 
 @app.post("/school/")
 def create_student(student: StudentSchema, db: Session = Depends(get_db)):
