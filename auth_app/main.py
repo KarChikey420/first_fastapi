@@ -25,12 +25,13 @@ async def register(user:schema.UserCreate,db:Session=Depends(database.get_db)):
 
 @app.post("/login")
 async def login(
-    from_data: OAuth2PasswordRequestForm = Depends(),
+    form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(database.get_db)
 ):
-    user=auth.get_user_by_name(db,from_data.username)
-    if not user or not auth.verify_password(from_data.password):
+    user = auth.get_user_by_username(db, form_data.username)
+    if not user or not auth.verify_password(form_data.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invailid credential"
+            detail="Invalid credentials"
         )
+    return {"message": "Login successful"}

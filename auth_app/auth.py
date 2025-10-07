@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from . import model
 
-def get_user_by_name(db:Session,username:str):
+def get_user_by_username(db:Session,username:str):
     return db.query(model.User).filter(model.User.username==username).first()
 
 def create_user(db:Session,username:str,email:str,password:str):
