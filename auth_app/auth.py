@@ -1,12 +1,12 @@
 from sqlalchemy.orm import Session
 from . import model
 
-def get_user_by_name(db:Session,user_name:str):
-    return db.query(model.user).filter(model.User.user_name==user_name).first()
+def get_user_by_name(db:Session,username:str):
+    return db.query(model.User).filter(model.User.username==username).first()
 
-def create_user(db:Session,user_name:str,email:str,password:str):
+def create_user(db:Session,username:str,email:str,password:str):
      db_user=model.User(
-         user_name=user_name,
+         username=username,
          email=email,
          password=password  
      )
