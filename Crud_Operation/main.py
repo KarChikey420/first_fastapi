@@ -17,4 +17,7 @@ product_list = [
 def get_data():
     return product_list
 
-@app
+@app.post("/add")
+def add_prduct(product:product):
+    product_list.append(product)
+    return {"message":"product added successfully"}
