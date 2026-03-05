@@ -21,3 +21,12 @@ def get_data():
 def add_prduct(product:product):
     product_list.append(product)
     return {"message":"product added successfully"}
+
+@app.put("/update/{id}")
+def update_product(id:int, product:product):
+    for p in product_list:
+        if p.id==p:
+            p.name=product.name
+            p.classes=product.classes
+            return {"message":"product update successfully"}
+        
