@@ -13,36 +13,8 @@ product_list = [
     product(id=3, name="ghi", classes="class3")
 ]
 
-@app.get("/products")
-def get_all_product():
+@app.get("/")
+def get_data():
     return product_list
 
-@app.get("/product/{id}")
-def get_one_product(id:int):
-    for product in product_list:
-       if product.id== id:
-           return product
-       
-    return {"meassage":"not in list"}
-
-@app.post("/product")
-def add_product(product:product):
-    product_list.append(product)
-    return product
-
-@app.put("/product")
-def update_product(id:int ,product:product):
-    for i in range(len(product_list)):
-        if product[i].id == id:
-            product_list[i]=product
-            return "product is successfully updated"
-    return "not found" 
-
-@app.delete('/product/{id}')
-def delete_product(id:int):
-    for i in range(len(product_list)):
-        if product_list[i].id==id:
-            product_list.pop(i)
-            return "product is successfully deleted"
-    return "not found"
-            
+@app
