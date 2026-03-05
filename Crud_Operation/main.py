@@ -28,5 +28,11 @@ def update_product(id:int, product:product):
         if p.id==p:
             p.name=product.name
             p.classes=product.classes
-            return {"message":"product update successfully"}
-        
+    return {"message":"product update successfully"}
+
+@app.delete("/delete/{id}")
+def delete_product(id:int):
+    for p in product_list:
+        if p.id==id:
+            product_list.remove(p)
+    return {"message":"product deleted successfully"}
