@@ -1,24 +1,26 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import List
 import uvicorn
 
-app=FastAPI()
+app= FastAPI()
 
-class LoginRequest(BaseModel):
-    email: str
+class Item(BaseModel):
+    username: str
     password: str
-
-model=[{
-    "email":"user@example.com",
-    "password":"password123"
+    
+login_details=[{
+    "username": "admin",
+    "password": "admin123"
 }]
 
-@app.post("/signin")
-def signin(user: LoginRequest):
-    for i in model:
-        if i['email']==user.email and i['password']==user.password:
-            return {"message":"login successful"}
-    return {"message":"invalid email or password"}
-
-if __name__=="__main__":
+@app.post("/login")
+def login(item:Item):
+    for details in login_details:
+        if item.username == details['username'] and item.password == details['password']:
+            return {"message":"Login successful"}
+        return {"message":"Invalid username or password"}
+    
+if __name__ == "__main__":
     uvicorn.run(app,host="0.0.0.0",port=8000)
+    
